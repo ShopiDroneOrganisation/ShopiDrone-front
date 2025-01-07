@@ -1,0 +1,51 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .content {
+        gap: 20px;
+        height: var(--navbar-height);
+
+        .nav-item {
+            position: relative;
+
+            &:before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                background-color: currentColor;
+                bottom: -2px;
+                left: 0;
+                opacity: 1;
+                transition: transform .2s ease-in-out;
+                height: 2px;
+                -webkit-transform: scaleX(0);
+                -moz-transform: scaleX(0);
+                -ms-transform: scaleX(0);
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+
+            &.-current:before {
+                -webkit-transform: scaleX(1);
+                -moz-transform: scaleX(1);
+                -ms-transform: scaleX(1);
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    @media (hover: hover) {
+        .content .nav-item:hover {
+            &:before {
+                -webkit-transform: scaleX(1);
+                -moz-transform: scaleX(1);
+                -ms-transform: scaleX(1);
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+        }
+    }
+}
