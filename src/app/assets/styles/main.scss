@@ -3,8 +3,12 @@
 @use "commons";
 
 @use "components/flex";
+@use "components/grid";
 @use 'components/_btn';
 
 @use "pages/home";
 
-@use "../../components/navbar";
+@use "../../components/NavBar/navbar";
+
+@use "../../dashboard/dashboard";
+@use "../../sell/sell";

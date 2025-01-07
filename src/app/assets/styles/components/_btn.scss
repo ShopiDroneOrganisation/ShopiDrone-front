@@ -64,12 +64,19 @@ button, .default-btn, .btn {
     color: variables.$color-white;
     background-color: variables.$color-black;
 
+    > .label {
+        text-align: center;
+    }
+
     &.-ico {
         .label {
             line-height: 0;
         }
     }
-    > .label {
-        text-align: center;
+
+    &.-outline {
+        background-color: transparent;
+        border: solid 1px variables.$color-black;
+        color: variables.$color-black;
     }
 }
