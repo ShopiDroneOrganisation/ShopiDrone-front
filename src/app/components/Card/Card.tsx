@@ -1,4 +1,6 @@
+'use client'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import './Card.scss'
 
 interface CardProps {
@@ -6,11 +8,18 @@ interface CardProps {
     name: string
     price: number
     description: string
+    id: number 
 }
 
-const Card: React.FC<CardProps> = ({ name, price, description, img }) => {
+const Card: React.FC<CardProps> = ({ name, price, description, img, id }) => {
+    const router = useRouter()
+
+    const handleCardClick = () => {
+        router.push(`/product/${id}`) 
+    }
+
     return (
-        <div className='card'>
+        <div className='card' onClick={handleCardClick} style={{ cursor: 'pointer' }}>
             <div className='card-image'>
                 <img src={img} alt={name} />
             </div>
