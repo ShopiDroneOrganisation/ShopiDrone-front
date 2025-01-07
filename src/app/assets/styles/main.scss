@@ -1,2 +1,10 @@
-@import "variables";
-@import "commons";
+@use "reset";
+@use '_ui';
+@use "commons";
+
+@use "components/flex";
+@use 'components/_btn';
+
+@use "pages/home";
+
+@use "../../components/navbar";
