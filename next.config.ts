@@ -1,7 +1,16 @@
-import type { NextConfig } from "next";
+import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    css: ['@/assets/styles/main.scss'],
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: '@import "~/assets/styles/_variables.scss";'
+                }
+            }
+        },
+    },
 };
 
 export default nextConfig;
