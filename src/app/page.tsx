@@ -1,10 +1,10 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import "../app/assets/styles/main.scss";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      shopidrone
-    </div>
-  );
+    return (
+        <div className={'page'}>
+            shopidrone
+        </div>
+    );
 }
