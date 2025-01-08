@@ -7,7 +7,7 @@ export default function Navbar() {
                 <div className={'flex -justify-space-between -align-center content'}>
                     <a href="/public" className={'home'}>ShopiDrone</a>
                     <a href="/public" className={'nav-item'}>Vends tes pièces</a>
-                    <a href="/public" className={'btn'}>Se connecter</a>
+                    <a href="/auth" className={'btn'}>Se connecter</a>
                 </div>
             </div>
         </div>
