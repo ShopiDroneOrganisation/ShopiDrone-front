@@ -1,12 +1,19 @@
 @use "variables";
 
-@mixin title-4( $size-desktop: 4rem,  $size-mobile: 2.4rem, ) {
-    /*font: variables.$medium #{$size-desktop}/1.3 variables.$font-platform;
-    font-feature-settings: 'ss01' on;
-    letter-spacing: 0.04rem;
+@mixin title-1() {
+    font-size: 24px;
+    font-weight: variables.$medium;
+    line-height: 42px;
+}
 
-    @media #{variables.$mobile} {
-        font-size: #{$size-mobile};
-        letter-spacing: 0.024rem;
-    }*/
+@mixin title-3() {
+    font-size: 16px;
+    font-weight: variables.$bold;
+    line-height: 24px;
+}
+
+@mixin body() {
+    font-size: 14px;
+    font-weight: variables.$regular;
+    line-height: 16px;
 }
