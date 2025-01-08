@@ -19,7 +19,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="wrapper -large -padded">
-                <ProductSelection />
+                <ProductSelection/>
                 <SellPush/>
                 <Trustpilot/>
             </div>
