@@ -9,7 +9,9 @@ export default function Home() {
     return (
         <div className="page-home">
             <div className="wrapper -xlarge banner-wrapper">
+                <div className="banner-container">
                 <Image src={banner} alt={''} className={'banner'} width={1440} height={768}/>
+                </div>
                 <div className="wrapper -medium -padded sign-wrapper">
                     <div className="sign flex -direction-column">
                         <p className={'title-1'}>Faites de la place, vendez vos drones et pièces facilement !</p>
