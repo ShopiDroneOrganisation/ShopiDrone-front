@@ -21,11 +21,7 @@
     &.btn {
         display: flex;
         align-items: center;
-
-        .ico {
-            /* pour contrer la police pétée */
-            transform: translateY(0.1rem);
-        }
+        gap: 10px;
     }
 
     i {
@@ -53,21 +49,24 @@ button, .default-btn, .btn {
 }
 
 .btn {
-    display: block;
+    display: flex;
+    justify-content: center;
     width: max-content;
     max-width: 100%;
     padding: 12px 17px;
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
     color: variables.$color-white;
-    background-color: variables.$color-black;
+    background-color: variables.$color-blue;
+    text-align: center;
 
     > .label {
         text-align: center;
     }
 
     &.-ico {
+
         .label {
             line-height: 0;
         }
@@ -77,5 +76,16 @@ button, .default-btn, .btn {
         background-color: transparent;
         border: solid 1px variables.$color-black;
         color: variables.$color-black;
+    }
+}
+
+.link {
+    text-decoration: underline;
+    color: variables.$color-blue;
+}
+
+@media(hover:hover) {
+    .link:hover {
+        text-decoration: none;
     }
 }

@@ -1,3 +1,35 @@
-.home {
+@use '../variables';
 
+.page-home {
+    .banner-wrapper {
+        position: relative;
+        margin-bottom: 17px;
+        overflow: scroll;
+
+        .banner {
+            object-fit: cover;
+            z-index: 10;
+            position: relative;
+            object-position: center;
+        }
+
+        .sign-wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            z-index: 20;
+
+            .sign {
+                width: 384px;
+                padding: 33px;
+                background-color: variables.$color-white;
+
+                > .sell-btn {
+                    margin: 34px 0 13px;
+                    width: 100%;
+                }
+            }
+        }
+    }
 }

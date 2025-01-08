@@ -1,5 +1,6 @@
 @use "reset";
-@use '_ui';
+@use 'typography';
+@use 'ui';
 @use "commons";
 
 @use "components/flex";
@@ -9,6 +10,9 @@
 @use "pages/home";
 
 @use "../../components/NavBar/navbar";
+@use "../../components/SellPush/sellpush";
+@use "../../components/Trustpilot/trustpilot";
+@use "../../components/Footer/footer";
 
 @use "../../dashboard/dashboard";
 @use "../../sell/sell";
