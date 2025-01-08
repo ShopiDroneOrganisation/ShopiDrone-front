@@ -44,6 +44,7 @@ $wrappers: (
     --wrapper-padding: 40px;
     --navbar-height: 80px;
     --vh: 1vh;
+    font-family: 'Montserrat', sans-serif;
 
     @media #{$mobile} {
         --wrapper-padding: 30px;
