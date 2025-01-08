@@ -10,7 +10,7 @@ export default function Navbar() {
             <a href="/fullList" className={"nav-item"}>Acheter</a>
             <a href="/sell" className={"nav-item"}>Vends tes pièces</a>
           </div>
-          <a href="/public" className={"btn"}>Se connecter</a>
+            <a href="/auth" className={'btn'}>Se connecter</a>
         </div>
       </div>
     </div>
