@@ -6,6 +6,13 @@
         margin-bottom: 17px;
         overflow: scroll;
 
+        .banner-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
         .banner {
             object-fit: cover;
             z-index: 10;
@@ -25,7 +32,7 @@
                 padding: 33px;
                 background-color: variables.$color-white;
 
-                > .sell-btn {
+                >.sell-btn {
                     margin: 34px 0 13px;
                     width: 100%;
                 }

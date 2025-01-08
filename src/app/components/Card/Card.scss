@@ -1,3 +1,5 @@
+@use '../../assets/styles/variables';
+
 .card {
     height: 400px;
     width: 250px;
@@ -9,6 +11,7 @@
     position: relative;
     background-color: #F2F2F2;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
     .card-image {
         height: 80%;
@@ -34,6 +37,12 @@
             transition: color 0.3s ease;
         }
 
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: variables.$color-blue;
+        }
+
         .card-info {
             display: flex;
             justify-content: space-between;
@@ -49,12 +58,18 @@
         }
     }
 
-    &:hover .description {
-        max-height: 400px;
-        opacity: 1; 
-    }
-    &:hover h2 {
-        color: #FF0000;
-        
+    &:hover {
+        background-color: variables.$color-blue; 
+        color: #FFFFFF; 
+
+        .card-text h2,
+        .card-text p {
+            color: #FFFFFF; 
+        }
+
+        .description {
+            max-height: 400px;
+            opacity: 1; 
+        }
     }
 }
