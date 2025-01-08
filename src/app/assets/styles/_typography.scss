@@ -13,7 +13,7 @@ h1, .title-1 {
     @include typography-mixins.title-1;
 }
 
-h3, title-3 {
+h3, .title-3 {
     @include typography-mixins.title-3;
 }
 
