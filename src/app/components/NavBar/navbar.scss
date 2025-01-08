@@ -3,7 +3,9 @@
     top: 0;
     left: 0;
     width: 100%;
-
+    background-color: white;
+    z-index: 10;
+    
     .content {
         gap: 20px;
         height: var(--navbar-height);

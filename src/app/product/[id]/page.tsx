@@ -24,15 +24,14 @@ const ProductDetail: React.FC = () => {
         </div>
         <div className="details-text">
           <div className="details-info">
-            <h2>{product.name}</h2>
+            <h2>{product.name}</h2> 
             <p>${product.price}</p>
           </div>
+      <div className="details-button-container">
           <p>{product.description}</p>
+        <button className="details-button">Ajouter au panier</button>
         </div>
       </div>
-      <div className="details-button-container">
-      <p>${product.price}</p>
-        <button className="details-button">Ajouter au panier</button>
       </div>
     </div>
   );

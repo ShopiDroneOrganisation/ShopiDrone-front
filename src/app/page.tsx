@@ -1,10 +1,9 @@
-import Image from "next/image";
-import ProductList from "./components/ProductList/ProductList"
+import ProductSelection from "./components/ProductSelection/ProductSelection";
 
 export default function Home() {
     return (
         <div className="home">
-            <ProductList />
+            <ProductSelection />
         </div>
     )
 }
