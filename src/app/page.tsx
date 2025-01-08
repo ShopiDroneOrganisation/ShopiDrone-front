@@ -1,6 +1,6 @@
 import Image from "next/image";
 import banner from './public/images/banner.jpg'
-import ProductList from "./components/ProductList/ProductList"
+import ProductSelection from "./components/ProductSelection/ProductSelection";
 import SellPush from "@/app/components/SellPush/SellPush";
 import Trustpilot from "@/app/components/Trustpilot/Trustpilot";
 import Footer from "@/app/components/Footer/Footer";
@@ -19,7 +19,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="wrapper -large -padded">
-                <ProductList/>
+                <ProductSelection />
                 <SellPush/>
                 <Trustpilot/>
             </div>
