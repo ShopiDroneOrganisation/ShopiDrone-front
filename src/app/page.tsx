@@ -25,7 +25,6 @@ export default function Home() {
                 <SellPush/>
                 <Trustpilot/>
             </div>
-            <Footer/>
         </div>
     )
 }
