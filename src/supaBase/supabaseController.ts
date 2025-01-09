@@ -13,6 +13,7 @@ export interface Product {
   description: string;
   image: string;
   categorie: string;
+  stock: number;
 }
 
 export const fetchAllArticles = async (): Promise<Product[]> => {

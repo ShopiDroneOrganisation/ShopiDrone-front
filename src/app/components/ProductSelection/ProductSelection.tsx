@@ -36,6 +36,8 @@ const ProductSelection = () => {
           name={product.nom}
           price={product.prix}
           description={product.description}
+          categorie={product.categorie}
+          stock={product.stock}
         />
       ))}
     </div>
