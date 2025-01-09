@@ -17,6 +17,10 @@ h3, .title-3 {
     @include typography-mixins.title-3;
 }
 
+h4, .title-4 {
+    @include typography-mixins.title-4;
+}
+
 body, .body {
     @include typography-mixins.body;
 }

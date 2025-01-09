@@ -61,6 +61,8 @@ button, .default-btn, .btn {
     color: variables.$color-white;
     background-color: variables.$color-blue;
     text-align: center;
+    transition: color .2s linear, background-color .2s linear;
+    @include typo.body;
 
     > .label {
         text-align: center;
@@ -86,6 +88,11 @@ button, .default-btn, .btn {
 }
 
 @media(hover:hover) {
+    .btn:hover {
+        background-color: variables.$color-light-grey;
+        color: variables.$color-blue;
+    }
+
     .link:hover {
         text-decoration: none;
     }
