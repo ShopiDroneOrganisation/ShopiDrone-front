@@ -225,3 +225,27 @@
     }
   }
   
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    .user-email {
+      font-size: 14px;
+      color: #333;
+    }
+  
+    .btn {
+      padding: 5px 10px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    .btn:hover {
+      background-color: #005bb5;
+    }
+  }
+  

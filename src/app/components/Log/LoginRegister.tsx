@@ -1,16 +1,12 @@
-// /app/components/log/LoginRegister.tsx
-
 'use client';
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthContext } from '@/app/context/AuthContext';
-import { User, getStoredUsers, setStoredUsers } from '@/app/utils/storage';
 import './LoginRegister.scss';
+import { supabase } from '../../../supaBase/subabase';
 
 const LoginRegister: React.FC = () => {
   const router = useRouter();
-  const { login } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
 
   // États pour le formulaire de connexion
@@ -19,69 +15,56 @@ const LoginRegister: React.FC = () => {
   const [loginError, setLoginError] = useState('');
 
   // États pour le formulaire d'inscription
-  const [registerUsername, setRegisterUsername] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [registerError, setRegisterError] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState('');
 
-  const [users, setUsersState] = useState<User[]>([]);
-
-  useEffect(() => {
-    const storedUsers = getStoredUsers();
-    console.log('Stored users:', storedUsers);
-    setUsersState(storedUsers);
-  }, []);
-
   // Fonction de gestion de la connexion
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Attempting to login with:', { email: loginEmail, password: loginPassword });
-    const user = users.find(
-      (u) => u.email === loginEmail && u.password === loginPassword
-    );
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password: loginPassword,
+      });
 
-    if (user) {
-      console.log('Login successful:', user);
-      login(user); // Utiliser la fonction de login du contexte
-      // Rediriger vers le dashboard
-      router.push('/dashboard');
-    } else {
-      console.log('Login failed: Invalid credentials');
-      setLoginError('Email ou mot de passe incorrect.');
+      if (error) {
+        console.error('Erreur de connexion:', error);
+        setLoginError('Email ou mot de passe incorrect.');
+      } else {
+        console.log('Connexion réussie');
+        // Rediriger vers le tableau de bord
+        router.push('/');
+      }
+    } catch (error) {
+      console.error('Erreur inattendue:', error);
+      setLoginError('Une erreur est survenue. Veuillez réessayer.');
     }
   };
 
   // Fonction de gestion de l'inscription
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Attempting to register with:', { username: registerUsername, email: registerEmail, password: registerPassword });
-    const existingUser = users.find(
-      (u) => u.email === registerEmail || u.username === registerUsername
-    );
-
-    if (existingUser) {
-      console.log('Registration failed: User already exists');
-      setRegisterError('Utilisateur déjà existant.');
-      setRegisterSuccess('');
-    } else {
-      // Ajouter le nouvel utilisateur aux données factices
-      const newUser: User = {
-        id: users.length + 1,
-        username: registerUsername,
+    try {
+      const { error } = await supabase.auth.signUp({
         email: registerEmail,
         password: registerPassword,
-      };
-      const updatedUsers = [...users, newUser];
-      console.log('Registering new user:', newUser);
-      setUsersState(updatedUsers);
-      setStoredUsers(updatedUsers);
-      setRegisterSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
-      setRegisterError('');
-      // Réinitialiser les champs d'inscription
-      setRegisterUsername('');
-      setRegisterEmail('');
-      setRegisterPassword('');
+      });
+
+      if (error) {
+        console.error('Erreur d\'inscription:', error);
+        setRegisterError('Une erreur est survenue lors de l\'inscription.');
+      } else {
+        console.log('Inscription réussie');
+        setRegisterSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
+        setRegisterError('');
+        setRegisterEmail('');
+        setRegisterPassword('');
+      }
+    } catch (error) {
+      console.error('Erreur inattendue:', error);
+      setRegisterError('Une erreur est survenue. Veuillez réessayer.');
     }
   };
 
@@ -143,16 +126,6 @@ const LoginRegister: React.FC = () => {
           <h2>Inscription</h2>
           {registerError && <p className="error">{registerError}</p>}
           {registerSuccess && <p className="success">{registerSuccess}</p>}
-          <div className="form-group">
-            <label htmlFor="register-username">Nom d'utilisateur :</label>
-            <input
-              type="text"
-              id="register-username"
-              value={registerUsername}
-              onChange={(e) => setRegisterUsername(e.target.value)}
-              required
-            />
-          </div>
           <div className="form-group">
             <label htmlFor="register-email">Email :</label>
             <input

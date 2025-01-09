@@ -1,20 +1,18 @@
-// /app/context/AuthContext.tsx
-
 'use client';
 
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import { User, getStoredUser, setStoredUser, removeStoredUser } from '@/app/utils/storage';
+import { supabase } from '../../supaBase/subabase';
 
 interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
-  logout: () => void;
+  user: any;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
-  login: () => {},
-  logout: () => {},
+  login: async () => {},
+  logout: async () => {},
 });
 
 interface Props {
@@ -22,25 +20,49 @@ interface Props {
 }
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    const storedUser = getStoredUser();
-    if (storedUser) {
-      setUser(storedUser);
-    }
+    const fetchSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+    };
+
+    // Écoute les changements d'état de l'authentification
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    fetchSession();
+
+    // Nettoyer la souscription lors du démontage du composant
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const login = (userData: User) => {
-    setUser(userData);
-    setStoredUser(userData);
-    console.log('User logged in:', userData);
+  const login = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      console.error('Erreur de connexion:', error.message);
+      throw new Error(error.message);
+    }
+
+    setUser(data?.user);
+    console.log('Connexion réussie:', data?.user);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error('Erreur de déconnexion:', error.message);
+      throw new Error(error.message);
+    }
+
     setUser(null);
-    removeStoredUser();
-    console.log('User logged out');
+    console.log('Déconnexion réussie');
   };
 
   return (
