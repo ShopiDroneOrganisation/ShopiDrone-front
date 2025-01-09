@@ -44,6 +44,8 @@ const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, c
           name={product.nom}
           price={product.prix}
           description={product.description}
+          categorie={product.categorie}
+          stock={product.stock}
         />
       ))}
     </div>
