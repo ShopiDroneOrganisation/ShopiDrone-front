@@ -4,6 +4,7 @@
 
 import React from 'react';
 import LoginRegister from '@/app/components/Log/LoginRegister';
+import './AuthPage.scss';
 
 const AuthPage: React.FC = () => {
   return (
@@ -14,3 +15,4 @@ const AuthPage: React.FC = () => {
 };
 
 export default AuthPage;
+
