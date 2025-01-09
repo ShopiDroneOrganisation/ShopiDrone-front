@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import { fetchAllArticles, Product } from '../../../supaBase/supabaseController';
 
-const ProductSelection = () => {
+interface ProductSelectionProps {
+  maxArticles?: number; // Nombre d'articles à afficher
+  category?: string; // Catégorie à filtrer
+}
+
+const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, category = '' }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,7 +16,10 @@ const ProductSelection = () => {
     const fetchProducts = async () => {
       try {
         const articles = await fetchAllArticles();
-        setProducts(articles.slice(0, 15)); // Sélectionne les 4 premiers produits
+        const filteredArticles = category
+          ? articles.filter((article) => article.categorie === category) // Filtrer par catégorie
+          : articles;
+        setProducts(filteredArticles.slice(0, maxArticles)); // Limiter le nombre d'articles
       } catch (error) {
         console.error('Erreur lors du chargement des produits:', error);
       } finally {
@@ -20,7 +28,7 @@ const ProductSelection = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [maxArticles, category]); // Déclenche un rechargement si maxArticles ou category change
 
   if (isLoading) {
     return <div>Chargement des produits...</div>;

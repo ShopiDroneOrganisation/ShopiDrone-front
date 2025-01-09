@@ -1,8 +1,7 @@
-// components/ProductList.tsx
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Card from "../Card/Card";
-import { fetchAllArticles, Product } from "../../../supaBase/supabaseController";
+import { fetchAllArticles, Product, categorie } from "../../../supaBase/supabaseController";
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -27,8 +26,16 @@ const ProductList: React.FC = () => {
   }, []);
 
   const maxPriceInProducts = products.length ? Math.max(...products.map((product) => product.prix)) : 0;
-  const allCategories = Array.from(new Set(products.map((product) => product.categorie)));
 
+  // Extract categories from the enum
+  const allCategories = Object.values(categorie).filter((value) => typeof value === "string");
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category) ? prev.filter((cat) => cat !== category) : [...prev, category]
+    );
+  };
+  
   const filteredProducts = products
     .filter(
       (product) =>
@@ -43,12 +50,7 @@ const ProductList: React.FC = () => {
       if (sortOrder === "desc") return b.prix - a.prix;
       return 0;
     });
-
-  const toggleCategory = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((cat) => cat !== category) : [...prev, category]
-    );
-  };
+  
 
   const handleApplyFilter = () => {
     setShowPriceFilter(false);
