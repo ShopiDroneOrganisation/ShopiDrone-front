@@ -15,6 +15,15 @@ export interface Product {
   categorie: string;
 }
 
+export enum categorie {
+    'Drone',
+    'Batterie',
+    'Helices',
+    'Camera',
+    'Telecommande',
+    'Electronique',
+}
+
 export const fetchAllArticles = async (): Promise<Product[]> => {
   const { data, error } = await supabase.from('article').select('*');
   if (error) {

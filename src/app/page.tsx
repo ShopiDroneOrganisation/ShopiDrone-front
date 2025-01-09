@@ -21,8 +21,9 @@ export default function Home() {
                 </div>
             </div>
             <div className="wrapper -large -padded">
-                <ProductSelection/>
+                <ProductSelection maxArticles={15} category="Drone"/>
                 <SellPush/>
+                <ProductSelection maxArticles={10} category="Camera"/>
                 <Trustpilot/>
             </div>
         </div>
