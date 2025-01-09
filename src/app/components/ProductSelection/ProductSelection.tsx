@@ -4,8 +4,8 @@ import Card from '../Card/Card';
 import { fetchAllArticles, Product } from '../../../supaBase/supabaseController';
 
 interface ProductSelectionProps {
-  maxArticles?: number; // Nombre d'articles à afficher
-  category?: string; // Catégorie à filtrer
+  maxArticles?: number;
+  category?: string;
 }
 
 const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, category = '' }) => {
@@ -17,9 +17,9 @@ const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, c
       try {
         const articles = await fetchAllArticles();
         const filteredArticles = category
-          ? articles.filter((article) => article.categorie === category) // Filtrer par catégorie
+          ? articles.filter((article) => article.categorie === category)
           : articles;
-        setProducts(filteredArticles.slice(0, maxArticles)); // Limiter le nombre d'articles
+        setProducts(filteredArticles.slice(0, maxArticles));
       } catch (error) {
         console.error('Erreur lors du chargement des produits:', error);
       } finally {
@@ -28,7 +28,7 @@ const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, c
     };
 
     fetchProducts();
-  }, [maxArticles, category]); // Déclenche un rechargement si maxArticles ou category change
+  }, [maxArticles, category]);
 
   if (isLoading) {
     return <div>Chargement des produits...</div>;

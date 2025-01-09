@@ -9,6 +9,8 @@ import { AuthContext } from '@/app/context/AuthContext';
 import { FaUserCircle } from 'react-icons/fa';
 import { MdLogout, MdInfo } from 'react-icons/md';
 import './navbar.scss';
+import Image from 'next/image';
+import logo from '@/app/public/images/shopidrone.png';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useContext(AuthContext);
@@ -43,7 +45,7 @@ const Navbar: React.FC = () => {
     <nav className="navbar">
       <div className="navbar-left">
         <Link href="/" className="navbar-logo">
-          ShopiDrone
+          <Image src={logo} alt="ShopiDrone Logo" width={100} height={50} />
         </Link>
         <div className="navbar-items">
           <Link href="/fullList" className={`nav-item ${pathname === '/fullList' ? 'active' : ''}`}>

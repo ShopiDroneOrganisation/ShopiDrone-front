@@ -19,6 +19,8 @@ const Card: React.FC<CardProps> = ({name, price, description, categorie, img, st
         router.push(`/product/${id}`)
     }
 
+    const priceWithTax = price * 1.2;
+
     return (
         <div className='card' onClick={handleCardClick} style={{cursor: 'pointer'}}>
             <div className='card-image'>
@@ -29,7 +31,7 @@ const Card: React.FC<CardProps> = ({name, price, description, categorie, img, st
                 <div className="title-4 category">{categorie}</div>
                 <div className={'body price'}>{price} €</div>
                 <div className="flex -justify-space-between -align-center">
-                    <div className="title-4 tva">{price} € <span className="small">incl. tva</span></div>
+                    <div className="title-4 tva">{priceWithTax.toFixed(2)} € <span className="small">incl. tva</span></div>
                     <div className="body stock">Stock : {stock}</div>
                 </div>
             </div>

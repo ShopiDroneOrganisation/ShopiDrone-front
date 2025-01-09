@@ -3,11 +3,12 @@ import banner from './public/images/banner.jpg'
 import ProductSelection from "./components/ProductSelection/ProductSelection";
 import SellPush from "@/app/components/SellPush/SellPush";
 import Trustpilot from "@/app/components/Trustpilot/Trustpilot";
+import PictureMenu from "./components/PictureMenu/PictureMenu";
 
 export default function Home() {
     return (
         <div className="page-home">
-            <div className="wrapper -xlarge banner-wrapper">
+            <div className="banner-wrapper">
                 <div className="banner-container">
                 <Image src={banner} alt={''} className={'banner'} width={1440} height={768}/>
                 </div>
@@ -19,7 +20,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className="wrapper -large -padded">
+            <div>
+                <PictureMenu/>
                 <ProductSelection maxArticles={15} category="Drone"/>
                 <SellPush/>
                 <ProductSelection maxArticles={10} category="Camera"/>
