@@ -4,7 +4,7 @@
 
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
 import { FaUserCircle } from 'react-icons/fa';
 import { MdLogout, MdInfo } from 'react-icons/md';
@@ -15,6 +15,7 @@ const Navbar: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Fermer le dropdown si on clique en dehors
   useEffect(() => {
@@ -35,8 +36,14 @@ const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    // Rediriger vers la page d'authentification après la déconnexion
-    window.location.href = '/auth';
+    router.push('/auth');
+  };
+
+  const handleSellClick = (e: React.MouseEvent) => {
+    if (!user) {
+      e.preventDefault();
+      router.push('/auth');
+    }
   };
 
   return (
@@ -49,7 +56,11 @@ const Navbar: React.FC = () => {
           <Link href="/fullList" className={`nav-item ${pathname === '/fullList' ? 'active' : ''}`}>
             Acheter
           </Link>
-          <Link href="/sell" className={`nav-item ${pathname === '/sell' ? 'active' : ''}`}>
+          <Link 
+            href={user ? "/sell" : "#"} 
+            className={`nav-item ${pathname === '/sell' ? 'active' : ''}`}
+            onClick={handleSellClick}
+          >
             Vendre tes pièces
           </Link>
           {/* Ajoutez d'autres liens ici si nécessaire */}
