@@ -42,6 +42,17 @@ export default function ProductPage() {
     };
   }, [showModal]);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const image = e.currentTarget.querySelector('img');
+    if (!image) return;
+
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - left) / width * 100;
+    const y = (e.clientY - top) / height * 100;
+    
+    image.style.transformOrigin = `${x}% ${y}%`;
+  };
+
   if (loading) {
     return <div className="product-page-loader">Chargement...</div>
   }
@@ -53,7 +64,16 @@ export default function ProductPage() {
   return (
     <div className="product-page">
       <div className="product-container">
-        <div className="product-image">
+        <div 
+          className="product-image"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={(e) => {
+            const image = e.currentTarget.querySelector('img');
+            if (image) {
+              image.style.transformOrigin = 'center center';
+            }
+          }}
+        >
           <img src={product.image} alt={product.nom} />
         </div>
         
@@ -171,6 +191,8 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
+
+        <hr className="delivery-divider" />
 
         <div className="similar-products">
           <h3>Articles similaires</h3>
