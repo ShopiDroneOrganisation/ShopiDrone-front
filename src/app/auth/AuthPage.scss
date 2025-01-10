@@ -110,6 +110,16 @@
             }
         }
     }
+
+    .error-message {
+        color: #dc3545;
+        text-align: center;
+        margin-bottom: 16px;
+        font-size: 14px;
+        padding: 8px;
+        background-color: rgba(220, 53, 69, 0.1);
+        border-radius: 4px;
+    }
 }
 
 // Responsive

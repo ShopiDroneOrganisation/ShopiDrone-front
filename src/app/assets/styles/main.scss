@@ -20,6 +20,7 @@
 @use "../../product/[id]/DetailsItem";
 @use "../../components/ProductSelection/ProductSelection";
 @use "../../auth/AuthPage";
+@use "../../components/Notification/notification";
 
 .grid {
     display: grid;

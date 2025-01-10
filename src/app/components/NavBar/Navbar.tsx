@@ -33,9 +33,13 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/auth';
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setDropdownOpen(false);
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
+    }
   };
 
   const handleCategoryClick = (category: string) => {
@@ -74,32 +78,29 @@ const Navbar: React.FC = () => {
             </div>
 
             <div className="navbar-right">
-              <Link href="/sell" className="post-button">
+              <Link href={user ? "/sell" : "/auth"} className="post-button">
                 <Image src={icoAdd} alt={''} className={'ico'}/>
                 Déposer une annonce
               </Link>
-              {!user ? (
-                <Link href="/auth" className="account-button">
-                  <FaUserCircle size={20} />
-                  Compte
-                </Link>
-              ) : (
+              {typeof user?.email === 'string' ? (
                 <div className="profile-container" ref={dropdownRef}>
                   <button className="account-button" onClick={() => setDropdownOpen(!dropdownOpen)}>
                     <FaUserCircle size={20} />
-                    Compte
+                    {user.email}
                   </button>
                   {dropdownOpen && (
                     <div className="dropdown-menu">
-                      <Link href="/profile" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
-                        <MdInfo size={20} /> Info
-                      </Link>
                       <button className="dropdown-item" onClick={handleLogout}>
                         <MdLogout size={20} /> Déconnexion
                       </button>
                     </div>
                   )}
                 </div>
+              ) : (
+                <Link href="/auth" className="account-button">
+                  <FaUserCircle size={20} />
+                  Compte
+                </Link>
               )}
             </div>
           </div>
