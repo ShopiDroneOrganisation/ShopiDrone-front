@@ -4,12 +4,13 @@
 
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
-import { MdLogout, MdInfo } from 'react-icons/md';
+import { MdLogout, MdInfo, } from 'react-icons/md';
 import './navbar.scss';
 import Image from 'next/image';
+import icoAdd from '../../public/svg/ico-add.svg'
 import logo from '@/app/public/images/shopidrone.png';
 
 const Navbar: React.FC = () => {
@@ -74,6 +75,7 @@ const Navbar: React.FC = () => {
 
             <div className="navbar-right">
               <Link href="/sell" className="post-button">
+                <Image src={icoAdd} alt={''} className={'ico'}/>
                 Déposer une annonce
               </Link>
               {!user ? (

@@ -50,14 +50,14 @@
       flex: 1;
       display: flex;
       align-items: center;
-      max-width: 600px;
+      max-width: 700px;
       
       .search-input {
         flex: 1;
         height: 40px;
-        padding: 0 1rem;
+        padding: 20px;
         border: 2px solid #e5e5e5;
-        border-radius: 4px;
+        border-radius: 10px;
         font-size: 0.9rem;
         
         &:focus {
@@ -91,15 +91,25 @@
     }
 
     .post-button {
-      padding: 0.5rem 1rem;
+      padding: 12px 20px;
       background-color: #27377c;
       color: white;
-      border-radius: 4px;
+      border-radius: 10px;
       font-weight: 500;
       transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .ico {
+        width: 20px;
+        height: 20px;
+      }
 
       &:hover {
-        background-color: #0051cc;
+        background: #3f4f8f;
+        color: white;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
       }
     }
 

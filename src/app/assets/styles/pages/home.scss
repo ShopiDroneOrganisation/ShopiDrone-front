@@ -40,6 +40,12 @@
                 >.sell-btn {
                     margin: 34px 0 13px;
                     width: 100%;
+
+                    &:hover {
+                        background: #3f4f8f;
+                        color: white;
+                        box-shadow: 0 4px 8px #3f4f8f34;
+                    }
                 }
 
                 .title-1 {

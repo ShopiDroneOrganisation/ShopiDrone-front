@@ -16,7 +16,7 @@ export default function Home() {
                     <div className="sign flex -direction-column">
                         <p className={'title-1'}>Faites de la place, vendez vos drones et pièces facilement !</p>
                         <a href="/sell" className="btn sell-btn">Vends maintenant</a>
-                        <a href="#oui" className="link">Découvrir comment ça marche</a>
+                        <a href="/about" className="link">Découvrir qui est ShopiDrone</a>
                     </div>
                 </div>
             </div>
