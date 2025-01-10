@@ -6,12 +6,13 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
-import { FaUserCircle, FaSearch, FaUser } from 'react-icons/fa';
+import { FaUserCircle, FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa';
 import { MdLogout, MdInfo, } from 'react-icons/md';
 import './navbar.scss';
 import Image from 'next/image';
 import icoAdd from '../../public/svg/ico-add.svg'
 import logo from '@/app/public/images/shopidrone.png';
+import { useCart } from '@/app/context/CartContext';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const Navbar: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
+  const { getTotalItems } = useCart();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -105,6 +107,12 @@ const Navbar: React.FC = () => {
                   Compte
                 </Link>
               )}
+              <Link href="/cart" className="cart-icon">
+                <FaShoppingCart size={24} />
+                {getTotalItems() > 0 && (
+                  <span className="cart-badge">{getTotalItems()}</span>
+                )}
+              </Link>
             </div>
           </div>
         </div>

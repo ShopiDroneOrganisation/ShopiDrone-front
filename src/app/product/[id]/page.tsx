@@ -9,6 +9,7 @@ import relaisColis from '@/app/public/images/relais-colis.png'
 import chronopost from '@/app/public/images/shop2shop.png'
 import colissimo from '@/app/public/images/colissimo.png'
 import Image from 'next/image'
+import AddToCart from '@/app/components/AddToCart/AddToCart'
 
 export default function ProductPage() {
   const params = useParams() as { id: string }
@@ -19,7 +20,7 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       if (params.id) {
-        const productData = await fetchProductById(parseInt(params.id, 10))
+        const productData = await fetchProductById(params.id)
         setProduct(productData)
         setLoading(false)
       }
@@ -94,7 +95,7 @@ export default function ProductPage() {
 
           <div className="product-stock">
             <span className="stock-label">Stock:</span>
-            <span className="stock-value">{product.quantite || 1} unités</span>
+            <span className="stock-value">{product.stock} unités</span>
           </div>
 
           <hr className="product-divider" />
@@ -111,9 +112,15 @@ export default function ProductPage() {
             <span className="shipping-value">à partir de 3,89 €</span>
           </div>
 
-          <button className="buy-button">
-            Acheter
-          </button>
+          <AddToCart 
+            article={{
+              id: product.id,
+              nom: product.nom,
+              prix: product.prix,
+              image: product.image,
+              stock: product.stock
+            }} 
+          />
         </div>
       </div>
 
