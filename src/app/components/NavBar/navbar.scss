@@ -189,17 +189,25 @@
     .dropdown-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
+      gap: 8px;
       width: 100%;
+      padding: 12px 16px;
       border: none;
       background: none;
-      color: #333;
-      text-align: left;
       cursor: pointer;
-      
+      color: #2D3436;
+      transition: background-color 0.2s;
+
       &:hover {
-        background-color: #f5f5f5;
+        background-color: #f5f7fa;
+      }
+
+      svg {
+        color: #636E72;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #e9ecef;
       }
     }
   }

@@ -6,7 +6,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
-import { FaUserCircle, FaSearch } from 'react-icons/fa';
+import { FaUserCircle, FaSearch, FaUser } from 'react-icons/fa';
 import { MdLogout, MdInfo, } from 'react-icons/md';
 import './navbar.scss';
 import Image from 'next/image';
@@ -90,6 +90,9 @@ const Navbar: React.FC = () => {
                   </button>
                   {dropdownOpen && (
                     <div className="dropdown-menu">
+                      <button className="dropdown-item" onClick={() => router.push('/dashboard')}>
+                        <FaUser size={20} /> Dashboard
+                      </button>
                       <button className="dropdown-item" onClick={handleLogout}>
                         <MdLogout size={20} /> Déconnexion
                       </button>
