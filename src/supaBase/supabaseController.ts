@@ -43,4 +43,17 @@ export const fetchProductById = async (id: number): Promise<Product | null> => {
   return data as Product;
 };
 
+export const fetchArticlesByCategory = async (category: string): Promise<Product[]> => {
+  const { data, error } = await supabase
+    .from('article')
+    .select('*')
+    .ilike('categorie', category);
+    
+  if (error) {
+    console.error('Error fetching articles by category:', error.message);
+    return [];
+  }
+  return data as Product[];
+};
+
 // end article

@@ -4,9 +4,9 @@
 
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { AuthContext } from '@/app/context/AuthContext';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { MdLogout, MdInfo } from 'react-icons/md';
 import './navbar.scss';
 import Image from 'next/image';
@@ -16,15 +16,12 @@ const Navbar: React.FC = () => {
   const { user, logout } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Fermer le dropdown si on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
       }
     };
@@ -37,50 +34,87 @@ const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    // Rediriger vers la page d'authentification après la déconnexion
     window.location.href = '/auth';
+  };
+
+  const handleCategoryClick = (category: string) => {
+    router.push(`/fullList?category=${category.toLowerCase()}`);
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/fullList?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-left">
-        <Link href="/" className="navbar-logo">
-          <Image src={logo} alt="ShopiDrone Logo" width={100} height={50} />
-        </Link>
-        <div className="navbar-items">
-          <Link href="/fullList" className={`nav-item ${pathname === '/fullList' ? 'active' : ''}`}>
-            Acheter
-          </Link>
-          <Link href="/sell" className={`nav-item ${pathname === '/sell' ? 'active' : ''}`}>
-            Vendre tes pièces
-          </Link>
-          {/* Ajoutez d'autres liens ici si nécessaire */}
+      <div className="navbar-top">
+        <div className="wrapper -large -padded">
+          <div className="navbar-content">
+            <Link href="/" className="navbar-logo">
+              <Image src={logo} alt="ShopiDrone Logo" width={150} height={40} />
+            </Link>
+            
+            <div className="search-container">
+              <form onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Rechercher un produit..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" className="search-button">
+                  <FaSearch />
+                </button>
+              </form>
+            </div>
+
+            <div className="navbar-right">
+              <Link href="/sell" className="post-button">
+                Déposer une annonce
+              </Link>
+              {!user ? (
+                <Link href="/auth" className="account-button">
+                  <FaUserCircle size={20} />
+                  Compte
+                </Link>
+              ) : (
+                <div className="profile-container" ref={dropdownRef}>
+                  <button className="account-button" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                    <FaUserCircle size={20} />
+                    Compte
+                  </button>
+                  {dropdownOpen && (
+                    <div className="dropdown-menu">
+                      <Link href="/profile" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
+                        <MdInfo size={20} /> Info
+                      </Link>
+                      <button className="dropdown-item" onClick={handleLogout}>
+                        <MdLogout size={20} /> Déconnexion
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-      <div className="navbar-right">
-        {!user ? (
-          <Link href="/auth" className="login-link">
-            Se connecter
-          </Link>
-        ) : (
-          <div className="profile-container" ref={dropdownRef}>
-            <FaUserCircle
-              size={30}
-              className="profile-icon"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            />
-            {dropdownOpen && (
-              <div className="dropdown-menu">
-                <Link href="/profile" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
-                  <MdInfo size={20} /> Info
-                </Link>
-                <button className="dropdown-item" onClick={handleLogout}>
-                  <MdLogout size={20} /> Déconnexion
-                </button>
-              </div>
-            )}
+      
+      <div className="navbar-categories">
+        <div className="wrapper -large -padded">
+          <div className="categories-list">
+            <button onClick={() => handleCategoryClick('Drone')} className="category-item">Drone</button>
+            <button onClick={() => handleCategoryClick('Batterie')} className="category-item">Batterie</button>
+            <button onClick={() => handleCategoryClick('Helices')} className="category-item">Hélices</button>
+            <button onClick={() => handleCategoryClick('Camera')} className="category-item">Camera</button>
+            <button onClick={() => handleCategoryClick('Telecommande')} className="category-item">Télécommande</button>
+            <button onClick={() => handleCategoryClick('Electronique')} className="category-item">Électronique</button>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

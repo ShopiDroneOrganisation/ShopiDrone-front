@@ -21,18 +21,27 @@ const Card: React.FC<CardProps> = ({name, price, description, categorie, img, st
 
     const priceWithTax = price * 1.2;
 
+    const truncateTitle = (title: string, maxLength: number = 25) => {
+        if (title.length > maxLength) {
+            return title.substring(0, maxLength) + '...';
+        }
+        return title;
+    };
+
     return (
-        <div className='card' onClick={handleCardClick} style={{cursor: 'pointer'}}>
+        <div className='card' onClick={handleCardClick}>
             <div className='card-image'>
                 <img src={img} alt={name}/>
             </div>
             <div className='card-text'>
-                <div className={'title-3'}>{name}</div>
-                <div className="title-4 category">{categorie}</div>
-                <div className={'body price'}>{price} €</div>
-                <div className="flex -justify-space-between -align-center">
-                    <div className="title-4 tva">{priceWithTax.toFixed(2)} € <span className="small">incl. tva</span></div>
-                    <div className="body stock">Stock : {stock}</div>
+                <div className={'title-3'}>{truncateTitle(name)}</div>
+                <div className="category">{categorie}</div>
+                <div className="flex">
+                    <div className="price-block">
+                        <div className={'body price'}>{price} €</div>
+                        <div className="tva">{priceWithTax.toFixed(2)} € <span className="small">incl. tva</span></div>
+                    </div>
+                    <div className="stock">Stock : {stock}</div>
                 </div>
             </div>
         </div>

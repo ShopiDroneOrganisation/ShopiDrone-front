@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import { fetchAllArticles, Product } from '../../../supaBase/supabaseController';
+import './ProductSelection.scss';
 
 interface ProductSelectionProps {
   maxArticles?: number;
@@ -16,10 +17,12 @@ const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, c
     const fetchProducts = async () => {
       try {
         const articles = await fetchAllArticles();
+        const shuffledArticles = [...articles].sort(() => Math.random() - 0.5);
         const filteredArticles = category
-          ? articles.filter((article) => article.categorie === category)
-          : articles;
-        setProducts(filteredArticles.slice(0, maxArticles));
+          ? shuffledArticles.filter((article) => article.categorie === category)
+          : shuffledArticles;
+        const selectedArticles = filteredArticles.slice(0, maxArticles);
+        setProducts(selectedArticles);
       } catch (error) {
         console.error('Erreur lors du chargement des produits:', error);
       } finally {
@@ -34,20 +37,26 @@ const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, c
     return <div>Chargement des produits...</div>;
   }
 
+  if (products.length === 0) {
+    return <div>Aucun produit trouvé dans cette catégorie</div>;
+  }
+
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center' }}>
-      {products.map((product) => (
-        <Card
-          key={product.id}
-          id={product.id}
-          img={product.image}
-          name={product.nom}
-          price={product.prix}
-          description={product.description}
-          categorie={product.categorie}
-          stock={product.stock}
-        />
-      ))}
+    <div className="product-selection">
+      <div className="products-grid">
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            id={product.id}
+            img={product.image}
+            name={product.nom}
+            price={product.prix}
+            description={product.description}
+            categorie={product.categorie}
+            stock={product.stock}
+          />
+        ))}
+      </div>
     </div>
   );
 };

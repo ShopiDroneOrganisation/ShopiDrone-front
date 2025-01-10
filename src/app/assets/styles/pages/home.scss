@@ -1,6 +1,8 @@
 @use '../variables';
 
 .page-home {
+    font-family: 'Montserrat', Arial, sans-serif;
+    
     .banner-wrapper {
         position: relative;
         margin-bottom: 17px;
@@ -38,6 +40,16 @@
                 >.sell-btn {
                     margin: 34px 0 13px;
                     width: 100%;
+                }
+
+                .title-1 {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-weight: 600;
+                }
+                
+                .btn, .link {
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-weight: 500;
                 }
             }
         }

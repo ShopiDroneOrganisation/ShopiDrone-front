@@ -20,11 +20,11 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className="content">
                 <PictureMenu/>
-                <ProductSelection maxArticles={15} category="Drone"/>
+                <ProductSelection maxArticles={15}/>
                 <SellPush/>
-                <ProductSelection maxArticles={10} category="Camera"/>
+                <ProductSelection maxArticles={10}/>
                 <Trustpilot/>
             </div>
         </div>
