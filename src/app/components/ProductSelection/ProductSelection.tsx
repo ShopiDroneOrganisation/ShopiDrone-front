@@ -34,11 +34,23 @@ const ProductSelection: React.FC<ProductSelectionProps> = ({ maxArticles = 15, c
   }, [maxArticles, category]);
 
   if (isLoading) {
-    return <div>Chargement des produits...</div>;
+    return (
+      <div className="product-selection">
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
   }
 
   if (products.length === 0) {
-    return <div>Aucun produit trouvé dans cette catégorie</div>;
+    return (
+      <div className="product-selection">
+        <div className="loader-container">
+          Aucun produit trouvé dans cette catégorie
+        </div>
+      </div>
+    );
   }
 
   return (
