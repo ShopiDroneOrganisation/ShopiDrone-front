@@ -7,6 +7,7 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '../context/AuthContext';
 import { supabase } from '@/supaBase/subabase';
+import Image from 'next/image';
 
 export default function Sell() {
     const [title, setTitle] = useState('');
@@ -126,7 +127,13 @@ export default function Sell() {
                                     <div className="image-grid">
                                         {previewUrl ? (
                                             <div className="image-preview">
-                                                <img src={previewUrl} alt="Preview" />
+                                               <Image 
+                                                    src={previewUrl}
+                                                    alt="Preview"
+                                                    width={300}
+                                                    height={200}
+                                                    className="image-preview-img"
+                                                />
                                                 <button 
                                                     type="button" 
                                                     className="remove-image"

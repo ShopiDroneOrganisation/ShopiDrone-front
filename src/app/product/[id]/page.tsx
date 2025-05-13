@@ -75,7 +75,14 @@ export default function ProductPage() {
             }
           }}
         >
-          <img src={product.image} alt={product.nom} />
+          <Image 
+            src={product.image} 
+            alt={product.nom} 
+            width={600} 
+            height={400} 
+            className="product-main-image" 
+          />
+
         </div>
         
         <div className="product-info">

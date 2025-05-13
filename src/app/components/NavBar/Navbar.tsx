@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button type="submit" className="search-button">
+                <button type="submit" className="search-button" aria-label='Rechercher'>
                   <FaSearch />
                 </button>
               </form>
@@ -107,7 +107,7 @@ const Navbar: React.FC = () => {
                   Compte
                 </Link>
               )}
-              <Link href="/cart" className="cart-icon">
+              <Link href="/cart" className="cart-icon" aria-label='Panier'>
                 <FaShoppingCart size={24} />
                 {getTotalItems() > 0 && (
                   <span className="cart-badge">{getTotalItems()}</span>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FaCheckCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import './confirmation.scss';
+import Image from 'next/image';
 
 export default function ConfirmationPage() {
     const { items, clearCart, getTotalPrice } = useCart();
@@ -45,7 +46,13 @@ export default function ConfirmationPage() {
                         {items.map((item) => (
                             <div key={item.id} className="order-item">
                                 <div className="item-info">
-                                    <img src={item.image} alt={item.nom} />
+                                <Image 
+                                    src={item.image} 
+                                    alt={item.nom} 
+                                    width={80} 
+                                    height={80} 
+                                    className="order-item-image"
+                                />
                                     <div>
                                         <h3>{item.nom}</h3>
                                         <p>Quantité: {item.quantity}</p>

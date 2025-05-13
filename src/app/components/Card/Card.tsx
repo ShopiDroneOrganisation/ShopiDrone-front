@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import {useRouter} from 'next/navigation'
+import Image from 'next/image'
 
 interface CardProps {
     img: string
@@ -31,7 +32,13 @@ const Card: React.FC<CardProps> = ({name, price, description, categorie, img, st
     return (
         <div className='card' onClick={handleCardClick}>
             <div className='card-image'>
-                <img src={img} alt={name}/>
+            <Image
+                src={img}
+                alt={name}
+                width={300}
+                height={200}
+                className="card-img"
+            />
             </div>
             <div className='card-text'>
                 <div className={'title-3'}>{truncateTitle(name)}</div>

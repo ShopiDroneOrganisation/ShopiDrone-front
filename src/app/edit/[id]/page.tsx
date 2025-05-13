@@ -7,6 +7,7 @@ import { supabase } from '@/supaBase/subabase';
 import { categorie } from '@/app/types/categorie';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import './edit.scss';
+import Image from 'next/image';
 
 interface Article {
     id: number;
@@ -165,7 +166,14 @@ export default function EditArticle() {
                                     <div className="image-grid">
                                         {previewUrl ? (
                                             <div className="image-preview">
-                                                <img src={previewUrl} alt="Preview" />
+                                               <Image 
+                                                src={previewUrl} 
+                                                alt="Preview" 
+                                                width={300} 
+                                                height={200} 
+                                                className="image-preview-img" 
+                                                />
+
                                                 <button 
                                                     type="button" 
                                                     className="remove-image"

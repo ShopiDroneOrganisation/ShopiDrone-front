@@ -10,7 +10,15 @@ export default function Home() {
         <div className="page-home">
             <div className="banner-wrapper">
                 <div className="banner-container">
-                <Image src={banner} alt={''} className={'banner'} width={1440} height={768}/>
+                <Image
+                    src={banner}
+                    alt=""
+                    className="banner"
+                    width={1440}
+                    height={768}
+                    sizes="(max-width: 767px) 0px, 100vw"
+                    priority
+                />
                 </div>
                 <div className="wrapper -medium -padded sign-wrapper">
                     <div className="sign flex -direction-column">

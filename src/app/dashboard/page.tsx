@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa';
 import './dashboard.scss';
+import Image from 'next/image';
 
 interface Article {
     id: number;
@@ -109,11 +110,14 @@ export default function Dashboard() {
                     <div className="articles-grid">
                         {articles.map((article) => (
                             <div key={article.id} className="article-card">
-                                <img 
-                                    src={article.image} 
-                                    alt={article.nom} 
-                                    className="article-image"
+                               <Image 
+                                src={article.image} 
+                                alt={article.nom} 
+                                width={300} 
+                                height={200} 
+                                className="article-image" 
                                 />
+
                                 <div className="article-content">
                                     <h3>{article.nom}</h3>
                                     <div className="article-price">{article.prix} €</div>

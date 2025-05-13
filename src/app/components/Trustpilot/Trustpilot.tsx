@@ -112,6 +112,8 @@ const Trustpilot = () => {
                 <div 
                     className="trustpilot-reviews" 
                     ref={reviewsRef}
+                    tabIndex={0}
+  aria-label="Avis clients"
                 >
                     {reviews.map((review, index) => (
                         <div className="review-card" key={index}>
